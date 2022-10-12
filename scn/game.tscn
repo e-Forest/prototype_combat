@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://ce7qd8ggos580"]
+
+[ext_resource type="Script" path="res://src/game.gd" id="1_2ucn0"]
+[ext_resource type="PackedScene" uid="uid://cnstvp2qske2x" path="res://scn/player.tscn" id="1_nds0b"]
+[ext_resource type="PackedScene" uid="uid://dwhxtbtmxuej" path="res://scn/creature.tscn" id="2_gv75x"]
+[ext_resource type="Texture2D" uid="uid://cov76cerej4mj" path="res://ass/map1.png" id="2_jgnvy"]
+[ext_resource type="Script" path="res://src/Hud.gd" id="4_0hsi7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndssk"]
+size = Vector2(94, 54)
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_2ucn0")
+
+[node name="World" type="Node2D" parent="."]
+
+[node name="Ground" type="Sprite2D" parent="World"]
+position = Vector2(-125, -130)
+texture = ExtResource("2_jgnvy")
+centered = false
+
+[node name="house" type="StaticBody2D" parent="World/Ground"]
+
+[node name="CollisionShape2d" type="CollisionShape2D" parent="World/Ground/house"]
+position = Vector2(139, 156)
+shape = SubResource("RectangleShape2D_ndssk")
+
+[node name="Player" parent="World" instance=ExtResource("1_nds0b")]
+position = Vector2(93, 43)
+
+[node name="Camera2d" type="Camera2D" parent="World/Player"]
+current = true
+
+[node name="Creature" parent="World" instance=ExtResource("2_gv75x")]
+position = Vector2(103, 89)
+script = null
+
+[node name="Hud" type="CanvasLayer" parent="."]
+script = ExtResource("4_0hsi7")
+
+[node name="PlayerInputRenderer" type="Line2D" parent="Hud"]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+default_color = Color(1, 1, 1, 0.392157)
