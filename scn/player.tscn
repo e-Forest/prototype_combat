@@ -119,11 +119,11 @@ libraries = {
 wait_time = 0.4
 one_shot = true
 
+[node name="AttackRay" type="RayCast2D" parent="."]
+
 [node name="DebugState" type="Label" parent="."]
 offset_left = -24.0
 offset_top = -40.0
 offset_right = 34.0
 offset_bottom = -14.0
 text = "<state>"
-
-[node name="AttackRay" type="RayCast2D" parent="."]

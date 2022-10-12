@@ -1,4 +1,4 @@
-class_name Creature extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 var move_dir:Vector2
 var look_dir:Vector2
@@ -8,6 +8,7 @@ var attack_end_pos:Vector2
 var attack_range:float = 50.0
 
 var speed:float = 100.0
+
 
 @onready var move_dir_pointer = $MoveDirPointer as Line2D
 @onready var look_dir_pointer = $LookDirPointer as Line2D
@@ -29,18 +30,22 @@ func _ready():
 func _process(delta):
 	match state_machine.current_state:
 		States.Player.idle:
-			update_movement()
-			update_aimpointer()
 			if PlayerInput.get_move_vector()!=Vector2.ZERO:
 				state_machine.current_state = States.Player.run
+			update_movement()
+			update_aimpointer()
+#			update_lookpointer(PlayerInput.get_move_vector())
 		States.Player.run:
 			update_movement()
 			update_aimpointer()
+			update_lookpointer(PlayerInput.get_move_vector())
 			if PlayerInput.get_move_vector()==Vector2.ZERO:
 				state_machine.current_state = States.Player.idle
+#			print(str(PlayerInput.get_move_vector()))
 		States.Player.attack:
 			update_attack_movement()
 			update_aimpointer()
+			update_lookpointer(attack_end_pos-position)
 			if is_move_in_aim_direction() and (attack_timer.time_left < attack_timer.wait_time/2):
 				state_machine.current_state = States.Player.idle
 
@@ -63,6 +68,14 @@ func update_movement():
 	move_and_slide()
 
 
+func update_lookpointer(local_pos:Vector2):
+	if local_pos == Vector2.ZERO:
+		return
+	var dir = local_pos.normalized()
+	look_dir_pointer.set_point_position(0,Vector2.ZERO)
+	look_dir_pointer.set_point_position(1,dir*10)
+
+
 func update_aimpointer():
 	var target_pos = PlayerInput.get_delta_hold().normalized()*attack_range
 	attack_ray.target_position = target_pos
@@ -77,7 +90,7 @@ func is_move_in_aim_direction()->bool:
 	if not PlayerInput.get_move_vector()==Vector2.ZERO:
 		var aim_angle = PlayerInput.get_delta_end().angle()
 		var move_input_angle = PlayerInput.get_move_vector().angle()
-		var angle_delta = angle_dif(aim_angle, move_input_angle)
+		var angle_delta = Helper.angle_dif(aim_angle, move_input_angle)
 		ret = abs(angle_delta) < PI/3
 	return ret
 
@@ -98,10 +111,3 @@ func _on_aim_ended(start_pos:Vector2,end_pos:Vector2):
 	attack_start_pos = position
 	attack_end_pos = position + aim_dir_pointer.get_point_position(1)
 	attack_timer.start()
-
-
-func angle_dif(from : float, to : float)->float:
-	var ret = fposmod(to - from, TAU)
-	if ret > PI:
-		ret -= TAU
-	return ret

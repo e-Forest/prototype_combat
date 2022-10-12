@@ -10,7 +10,7 @@ config_version=5
 
 _global_script_classes=[{
 "base": "CharacterBody2D",
-"class": &"Creature",
+"class": &"Player",
 "language": &"GDScript",
 "path": "res://src/player.gd"
 }, {
@@ -20,7 +20,7 @@ _global_script_classes=[{
 "path": "res://src/StateMachine.gd"
 }]
 _global_script_class_icons={
-"Creature": "",
+"Player": "",
 "StateMachine": ""
 }
 
@@ -33,8 +33,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerInput="*res://src/player_input.gd"
-States="*res://src/States.gd"
+PlayerInput="*res://src/Autoload/player_input.gd"
+States="*res://src/Autoload/_states.gd"
+Helper="*res://src/Autoload/helper.gd"
 
 [display]
 
