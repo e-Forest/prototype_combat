@@ -34,7 +34,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 PlayerInput="*res://src/Autoload/player_input.gd"
-States="*res://src/Autoload/_states.gd"
+States="*res://src/Autoload/states.gd"
 Helper="*res://src/Autoload/helper.gd"
 
 [display]
