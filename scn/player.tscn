@@ -116,7 +116,7 @@ libraries = {
 }
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 0.6
+wait_time = 0.4
 one_shot = true
 
 [node name="DebugState" type="Label" parent="."]
@@ -125,3 +125,5 @@ offset_top = -40.0
 offset_right = 34.0
 offset_bottom = -14.0
 text = "<state>"
+
+[node name="AttackRay" type="RayCast2D" parent="."]

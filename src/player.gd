@@ -16,6 +16,7 @@ var speed:float = 100.0
 @onready var animation_player = $AnimationPlayer as AnimationPlayer
 @onready var attack_timer = $AttackTimer as Timer
 @onready var debug_state = $DebugState as Label
+@onready var attack_ray = $AttackRay  as RayCast2D
 
 
 func _ready():
@@ -39,6 +40,7 @@ func _process(delta):
 				state_machine.current_state = States.Player.idle
 		States.Player.attack:
 			update_attack_movement()
+			update_aimpointer()
 			if is_move_in_aim_direction() and (attack_timer.time_left < attack_timer.wait_time/2):
 				state_machine.current_state = States.Player.idle
 
@@ -62,8 +64,12 @@ func update_movement():
 
 
 func update_aimpointer():
+	var target_pos = PlayerInput.get_delta_hold().normalized()*attack_range
+	attack_ray.target_position = target_pos
+	if attack_ray.is_colliding():
+		target_pos = attack_ray.get_collision_point()-position
 	aim_dir_pointer.set_point_position(0,Vector2.ZERO)
-	aim_dir_pointer.set_point_position(1,PlayerInput.get_delta_hold().normalized()*10)
+	aim_dir_pointer.set_point_position(1,target_pos)
 
 
 func is_move_in_aim_direction()->bool:
@@ -72,7 +78,7 @@ func is_move_in_aim_direction()->bool:
 		var aim_angle = PlayerInput.get_delta_end().angle()
 		var move_input_angle = PlayerInput.get_move_vector().angle()
 		var angle_delta = angle_dif(aim_angle, move_input_angle)
-		ret = abs(angle_delta) < 0.5
+		ret = abs(angle_delta) < PI/3
 	return ret
 
 
@@ -90,7 +96,7 @@ func _on_state_entered(state):
 func _on_aim_ended(start_pos:Vector2,end_pos:Vector2):
 	state_machine.current_state = States.Player.attack
 	attack_start_pos = position
-	attack_end_pos = position + PlayerInput.get_delta_end().normalized()*attack_range
+	attack_end_pos = position + aim_dir_pointer.get_point_position(1)
 	attack_timer.start()
 
 
