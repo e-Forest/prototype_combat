@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "Area2D",
 "class": &"HitBox",
 "language": &"GDScript",
-"path": "res://src/HitBox.gd"
+"path": "res://src/_hit_box.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"Player",
@@ -22,7 +22,7 @@ _global_script_classes=[{
 "base": "Node2D",
 "class": &"StateMachine",
 "language": &"GDScript",
-"path": "res://src/StateMachine.gd"
+"path": "res://src/_state_machine.gd"
 }]
 _global_script_class_icons={
 "HitBox": "",
@@ -39,9 +39,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerInput="*res://src/Autoload/player_input.gd"
-States="*res://src/Autoload/states.gd"
-Helper="*res://src/Autoload/helper.gd"
+PlayerInput="*res://src/_autoload/player_input.gd"
+States="*res://src/_autoload/states.gd"
+Helper="*res://src/_autoload/helper.gd"
 
 [display]
 

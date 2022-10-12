@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ce7qd8ggos580"]
+[gd_scene load_steps=7 format=3 uid="uid://b3rm5oq3dxte5"]
 
 [ext_resource type="Script" path="res://src/game.gd" id="1_2ucn0"]
-[ext_resource type="PackedScene" uid="uid://cnstvp2qske2x" path="res://scn/player.tscn" id="1_nds0b"]
+[ext_resource type="PackedScene" uid="uid://b48bv152xxlsg" path="res://scn/player.tscn" id="1_nds0b"]
 [ext_resource type="PackedScene" uid="uid://dwhxtbtmxuej" path="res://scn/creature.tscn" id="2_gv75x"]
 [ext_resource type="Texture2D" uid="uid://cov76cerej4mj" path="res://ass/map1.png" id="2_jgnvy"]
-[ext_resource type="Script" path="res://src/Hud.gd" id="4_0hsi7"]
+[ext_resource type="Script" path="res://src/_hud.gd" id="4_0hsi7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ndssk"]
 size = Vector2(94, 54)
