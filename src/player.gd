@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+var body_height:int = 16
+
 var move_dir:Vector2
 var look_dir:Vector2
 
@@ -18,6 +20,9 @@ var speed:float = 100.0
 @onready var attack_timer = $AttackTimer as Timer
 @onready var debug_state = $DebugState as Label
 @onready var attack_ray = $AttackRay  as RayCast2D
+@onready var hit_box_stroke = $HitBoxStroke as HitBox
+@onready var hit_box_stitch = $HitBoxStitch as HitBox
+
 
 
 func _ready():
@@ -34,18 +39,17 @@ func _process(delta):
 				state_machine.current_state = States.Player.run
 			update_movement()
 			update_aimpointer()
-#			update_lookpointer(PlayerInput.get_move_vector())
 		States.Player.run:
 			update_movement()
 			update_aimpointer()
 			update_lookpointer(PlayerInput.get_move_vector())
 			if PlayerInput.get_move_vector()==Vector2.ZERO:
 				state_machine.current_state = States.Player.idle
-#			print(str(PlayerInput.get_move_vector()))
 		States.Player.attack:
 			update_attack_movement()
 			update_aimpointer()
-			update_lookpointer(attack_end_pos-position)
+			update_lookpointer(get_attack_direction())
+			update_hitbox_stitch()
 			if is_move_in_aim_direction() and (attack_timer.time_left < attack_timer.wait_time/2):
 				state_machine.current_state = States.Player.idle
 
@@ -83,6 +87,14 @@ func update_aimpointer():
 		target_pos = attack_ray.get_collision_point()-position
 	aim_dir_pointer.set_point_position(0,Vector2.ZERO)
 	aim_dir_pointer.set_point_position(1,target_pos)
+
+
+func update_hitbox_stitch():
+	hit_box_stitch.position = get_attack_direction() * 10+Vector2.UP * body_height/2
+
+
+func get_attack_direction()->Vector2:
+	return (attack_end_pos - attack_start_pos).normalized()
 
 
 func is_move_in_aim_direction()->bool:

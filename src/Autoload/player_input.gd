@@ -1,11 +1,14 @@
 extends Node
 
+const  TRASHOLD:float = 5
+
 signal aim_started
 signal aim_ended(start_pos:Vector2,end_pos:Vector2)
 
 var aim_start:Vector2
 var aim_hold:Vector2
 var aim_end:Vector2
+
 
 func _process(delta):
 	
@@ -22,11 +25,18 @@ func _process(delta):
 	else:
 		aim_hold = aim_start
 
+
 func get_delta_hold()->Vector2:
-	return (aim_hold - aim_start)
+	var dif:Vector2 = aim_hold - aim_start
+	if dif.length() > TRASHOLD:
+		return (aim_hold - aim_start)
+	else:
+		return Vector2.ZERO
+
 
 func get_delta_end()->Vector2:
 	return (aim_end - aim_start)
+
 
 func get_move_vector()->Vector2:
 	return Input.get_vector("west","east","north","south")

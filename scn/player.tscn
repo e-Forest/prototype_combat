@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cnstvp2qske2x"]
+[gd_scene load_steps=13 format=3 uid="uid://cnstvp2qske2x"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_wl4ff"]
 [ext_resource type="Texture2D" uid="uid://ddgb5cb4dhedu" path="res://ass/player.png" id="2_feudt"]
 [ext_resource type="Script" path="res://src/StateMachine.gd" id="3_2emcj"]
+[ext_resource type="Script" path="res://src/HitBox.gd" id="4_5chwj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_upy8v"]
 radius = 8.0
@@ -80,10 +81,16 @@ _data = {
 "run": SubResource("Animation_4vndj")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_c21rk"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fvx33"]
+radius = 5.0
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_wl4ff")
 
-[node name="CollisionShape2d" type="CollisionShape2D" parent="."]
+[node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_upy8v")
 
@@ -127,3 +134,17 @@ offset_top = -40.0
 offset_right = 34.0
 offset_bottom = -14.0
 text = "<state>"
+
+[node name="HitBoxStroke" type="Area2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("4_5chwj")
+
+[node name="shape" type="CollisionShape2D" parent="HitBoxStroke"]
+shape = SubResource("CircleShape2D_c21rk")
+
+[node name="HitBoxStitch" type="Area2D" parent="."]
+position = Vector2(0, -8)
+script = ExtResource("4_5chwj")
+
+[node name="shape" type="CollisionShape2D" parent="HitBoxStitch"]
+shape = SubResource("CircleShape2D_fvx33")
