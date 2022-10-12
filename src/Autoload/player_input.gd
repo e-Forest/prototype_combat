@@ -26,7 +26,7 @@ func _process(delta):
 		aim_hold = aim_start
 
 
-func get_delta_hold()->Vector2:
+func get_dif_start2hold()->Vector2:
 	var dif:Vector2 = aim_hold - aim_start
 	if dif.length() > TRASHOLD:
 		return (aim_hold - aim_start)
@@ -34,8 +34,8 @@ func get_delta_hold()->Vector2:
 		return Vector2.ZERO
 
 
-func get_delta_end()->Vector2:
-	return (aim_end - aim_start)
+func get_dif_start2end()->Vector2:
+	return(aim_end-aim_start)
 
 
 func get_move_vector()->Vector2:

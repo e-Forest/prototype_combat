@@ -50,7 +50,7 @@ func _process(delta):
 			update_aimpointer()
 			update_lookpointer(get_attack_direction())
 			update_hitbox_stitch()
-			if is_move_in_aim_direction() and (attack_timer.time_left < attack_timer.wait_time/2):
+			if is_move_in_aim_direction() and is_attack_halftime_reached():
 				state_machine.current_state = States.Player.idle
 
 
@@ -81,7 +81,7 @@ func update_lookpointer(local_pos:Vector2):
 
 
 func update_aimpointer():
-	var target_pos = PlayerInput.get_delta_hold().normalized()*attack_range
+	var target_pos = PlayerInput.get_dif_start2hold().normalized()*attack_range
 	attack_ray.target_position = target_pos
 	if attack_ray.is_colliding():
 		target_pos = attack_ray.get_collision_point()-position
@@ -100,11 +100,15 @@ func get_attack_direction()->Vector2:
 func is_move_in_aim_direction()->bool:
 	var ret = false
 	if not PlayerInput.get_move_vector()==Vector2.ZERO:
-		var aim_angle = PlayerInput.get_delta_end().angle()
+		var aim_angle = PlayerInput.get_dif_start2end().angle()
 		var move_input_angle = PlayerInput.get_move_vector().angle()
 		var angle_delta = Helper.angle_dif(aim_angle, move_input_angle)
 		ret = abs(angle_delta) < PI/3
 	return ret
+
+
+func is_attack_halftime_reached()->bool:
+	return(attack_timer.time_left < attack_timer.wait_time/2)
 
 
 func _on_state_entered(state):
