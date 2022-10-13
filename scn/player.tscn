@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://src/state_machine.gd" id="3_8tomb"]
 [ext_resource type="Script" path="res://src/hit_box.gd" id="4_raxma"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_upy8v"]
-radius = 8.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_wdhh2"]
+radius = 2.0
 
 [sub_resource type="Animation" id="Animation_e64y2"]
 length = 0.001
@@ -87,12 +87,12 @@ radius = 20.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvx33"]
 radius = 5.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wl4ff")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-shape = SubResource("CircleShape2D_upy8v")
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_wdhh2")
 
 [node name="Skin" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
