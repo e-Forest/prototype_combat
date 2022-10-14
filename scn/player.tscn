@@ -148,3 +148,5 @@ script = ExtResource("4_raxma")
 
 [node name="shape" type="CollisionShape2D" parent="HitBoxStitch"]
 shape = SubResource("CircleShape2D_fvx33")
+
+[node name="NavAgent" type="NavigationAgent2D" parent="."]

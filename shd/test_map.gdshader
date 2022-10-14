@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D is_top;
-uniform float alpha: hint_range(0.0, 1.0, 0.1)=0.8;
+uniform float alpha: hint_range(0.0, 1.0, 0.1)=0.3;
 
 void fragment() {
 	vec4 c_obj = texture(TEXTURE,UV);
@@ -9,6 +9,8 @@ void fragment() {
 	
 	if(c_top.a > 0.0 && c_obj.a > 0.0){
 		COLOR = vec4(c_obj.r,c_obj.g,c_obj.b,alpha);
+	}else{
+		COLOR = vec4(c_obj.r,c_obj.g,c_obj.b,0.0);
 	}
 	
 }

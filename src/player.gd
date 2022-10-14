@@ -22,6 +22,7 @@ var speed:float = 100.0
 @onready var attack_ray = $AttackRay  as RayCast2D
 @onready var hit_box_stroke = $HitBoxStroke as HitBox
 @onready var hit_box_stitch = $HitBoxStitch as HitBox
+@onready var nav_agent = $NavAgent as NavigationAgent2D
 
 
 
@@ -50,13 +51,14 @@ func _process(delta):
 			update_aimpointer()
 			update_lookpointer(get_attack_direction())
 			update_hitbox_stitch()
-			if is_move_in_aim_direction() and is_attack_halftime_reached():
+			if is_move_in_aim_direction() and is_attack_halftime_reached() and is_position_walkable(global_position):
 				state_machine.current_state = States.Player.idle
 
 
 func update_attack_movement():
 	var a = attack_timer
 	var timer_percent = a.time_left/a.wait_time
+	var target_pos:Vector2
 	if timer_percent < 0.5:
 		var progress = timer_percent * 2
 		position = attack_start_pos.lerp(attack_end_pos,progress)
@@ -67,9 +69,19 @@ func update_attack_movement():
 
 func update_movement():
 	var v2 = PlayerInput.get_move_vector()
-	velocity = v2*speed
+	set_velocity_consider_nav(v2)
+#
 	move_dir_pointer.rotation = v2.angle()
 	move_and_slide()
+
+
+func set_velocity_consider_nav(v2:Vector2):
+	if v2 != Vector2.ZERO:
+		nav_agent.set_target_location(global_position+v2*10)
+		var next_location = nav_agent.get_next_location()
+		velocity = global_position.direction_to(next_location) * speed
+	else:
+		velocity = Vector2.ZERO
 
 
 func update_lookpointer(local_pos:Vector2):
@@ -104,6 +116,14 @@ func is_move_in_aim_direction()->bool:
 		var move_input_angle = PlayerInput.get_move_vector().angle()
 		var angle_delta = Helper.angle_dif(aim_angle, move_input_angle)
 		ret = abs(angle_delta) < PI/3
+	return ret
+
+
+func is_position_walkable(pos:Vector2)->bool:
+	var old_target_pos = nav_agent.get_target_location()
+	nav_agent.set_target_location(pos)
+	var ret = nav_agent.is_target_reachable()
+	nav_agent.set_target_location(old_target_pos)
 	return ret
 
 
