@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform sampler2D is_top;
-uniform float alpha: hint_range(0.0, 1.0, 0.1)=0.3;
+uniform float alpha=0.5;
 
 void fragment() {
 	vec4 c_obj = texture(TEXTURE,UV);

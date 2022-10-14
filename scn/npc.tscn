@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfyi60se7jt3d"]
+[gd_scene load_steps=4 format=3 uid="uid://b3noswe0aih0f"]
 
 [ext_resource type="Script" path="res://src/npc.gd" id="1_bx4xc"]
-[ext_resource type="Texture2D" uid="uid://3ammxum5hhkm" path="res://ass/creature.png" id="2_x34hu"]
+[ext_resource type="Texture2D" uid="uid://3ammxum5hhkm" path="res://ass/npc.png" id="2_ulutv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nog8t"]
 radius = 2.0
@@ -11,7 +11,7 @@ script = ExtResource("1_bx4xc")
 
 [node name="Skin" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = ExtResource("2_x34hu")
+texture = ExtResource("2_ulutv")
 
 [node name="CollisionShape2d" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -19,3 +19,11 @@ shape = SubResource("CircleShape2D_nog8t")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 avoidance_enabled = true
+neighbor_distance = 30.0
+max_speed = 50.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

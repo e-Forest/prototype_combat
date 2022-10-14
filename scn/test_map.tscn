@@ -1,18 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnoej6qxytdx"]
+[gd_scene load_steps=14 format=3 uid="uid://bnoej6qxytdx"]
 
 [ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://ass/ground1.png" id="1_8q8s3"]
 [ext_resource type="Script" path="res://src/test_map.gd" id="1_yj7ra"]
 [ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://ass/ground2.png" id="2_t7f11"]
 [ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://ass/objects1.png" id="3_6dvnm"]
 [ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://ass/objects2.png" id="4_vpsec"]
+[ext_resource type="PackedScene" uid="uid://b3noswe0aih0f" path="res://scn/npc.tscn" id="6_7n42m"]
 [ext_resource type="Shader" path="res://shd/test_map.gdshader" id="6_8q05f"]
 [ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://ass/is_top1.png" id="7_7ubgj"]
 [ext_resource type="PackedScene" uid="uid://di0pb23hwj7qv" path="res://scn/player.tscn" id="7_o1uyt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_exdxa"]
-vertices = PackedVector2Array(314, 142, 317, 246, 225, 285, 181, 284, 174, 253, 173, 240, 173, 164, 300, 70, 298, 374, 224, 302, 318, 444, 357, 509, 1, 510, 148, 238, 106, 161, 177, 300, 284, 3, 136, 130, 3, 3, 66, 127, 145, 251)
-polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(2, 1, 8, 9), PackedInt32Array(10, 11, 12), PackedInt32Array(6, 5, 13, 14), PackedInt32Array(9, 8, 10, 12, 15), PackedInt32Array(16, 7, 6, 17, 18), PackedInt32Array(18, 17, 19), PackedInt32Array(12, 18, 19), PackedInt32Array(12, 19, 14, 13, 20), PackedInt32Array(3, 15, 12, 20, 4)]
-outlines = [PackedVector2Array(3, 3, 284, 3, 300, 70, 314, 142, 317, 246, 298, 374, 318, 444, 357, 509, 1, 510), PackedVector2Array(66, 127, 136, 130, 173, 164, 106, 161), PackedVector2Array(148, 238, 173, 240, 174, 253, 145, 251), PackedVector2Array(181, 284, 225, 285, 224, 302, 177, 300)]
+vertices = PackedVector2Array(317, 246, 298, 374, 224, 305, 224, 289, 314, 142, 179, 288, 177, 257, 177, 240, 187, 169, 300, 70, 318, 444, 357, 509, 1, 510, 104, 167, 146, 240, 178, 304, 144, 129, 284, 3, 145, 255, 3, 3, 60, 128)
+polygons = [PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3, 5, 6, 7, 8, 9), PackedInt32Array(10, 11, 12), PackedInt32Array(13, 8, 7, 14), PackedInt32Array(2, 1, 10, 12, 15), PackedInt32Array(9, 8, 16, 17), PackedInt32Array(18, 6, 5, 15, 12), PackedInt32Array(19, 17, 16, 20), PackedInt32Array(12, 19, 20), PackedInt32Array(12, 20, 13, 14, 18)]
+outlines = [PackedVector2Array(3, 3, 284, 3, 300, 70, 314, 142, 317, 246, 298, 374, 318, 444, 357, 509, 1, 510), PackedVector2Array(60, 128, 144, 129, 187, 169, 104, 167), PackedVector2Array(146, 240, 177, 240, 177, 257, 145, 255), PackedVector2Array(179, 288, 224, 289, 224, 305, 178, 304)]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4yye3"]
 animations = [{
@@ -57,12 +58,14 @@ frame = 1
 centered = false
 
 [node name="is_top" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("7_7ubgj")
 centered = false
 
 [node name="Player" parent="." instance=ExtResource("7_o1uyt")]
-position = Vector2(154, 252)
+position = Vector2(60, 160)
 
 [node name="Camera2d" type="Camera2D" parent="Player"]
 current = true
+
+[node name="Npc" parent="." instance=ExtResource("6_7n42m")]
+position = Vector2(198, 112)
