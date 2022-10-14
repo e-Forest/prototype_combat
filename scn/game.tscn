@@ -1,63 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://c53wd7h3ul7pv"]
+[gd_scene load_steps=4 format=3 uid="uid://c53wd7h3ul7pv"]
 
 [ext_resource type="Script" path="res://src/game.gd" id="1_2ucn0"]
-[ext_resource type="PackedScene" uid="uid://di0pb23hwj7qv" path="res://scn/player.tscn" id="1_nds0b"]
-[ext_resource type="Texture2D" uid="uid://cov76cerej4mj" path="res://ass/map1.png" id="2_jgnvy"]
-[ext_resource type="PackedScene" uid="uid://cfyi60se7jt3d" path="res://scn/npc.tscn" id="3_qpunm"]
+[ext_resource type="PackedScene" uid="uid://bnoej6qxytdx" path="res://scn/test_map.tscn" id="2_eo8mr"]
 [ext_resource type="Script" path="res://src/hud.gd" id="4_0hsi7"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_gxdho"]
-vertices = PackedVector2Array(99, 149, 55, 149, 47, 126, 47, 104, 63, 56, 180, -52, 173, 262, 97, 169, 63, -4, -95, -47, -35, -3, -76, 273, -35, 55, 54, 169, 21, 125, 23, 103)
-polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(0, 5, 6, 7), PackedInt32Array(5, 4, 8), PackedInt32Array(9, 5, 8, 10), PackedInt32Array(11, 9, 10, 12), PackedInt32Array(7, 6, 11, 13), PackedInt32Array(13, 11, 12, 14), PackedInt32Array(12, 4, 3, 15), PackedInt32Array(14, 2, 1, 13), PackedInt32Array(14, 12, 15)]
-outlines = [PackedVector2Array(-95, -47, 180, -52, 173, 262, -76, 273), PackedVector2Array(-35, -3, 63, -4, 63, 56, -35, 55), PackedVector2Array(23, 103, 47, 104, 47, 126, 21, 125), PackedVector2Array(55, 149, 99, 149, 97, 169, 54, 169)]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndssk"]
-size = Vector2(94, 54)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_kpo6e"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aah4x"]
-size = Vector2(39, 15)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_2ucn0")
 
 [node name="World" type="Node2D" parent="."]
 
-[node name="NavigationRegion2d" type="NavigationRegion2D" parent="World"]
-navpoly = SubResource("NavigationPolygon_gxdho")
-
-[node name="Ground" type="Sprite2D" parent="World/NavigationRegion2d"]
-position = Vector2(-125, -130)
-texture = ExtResource("2_jgnvy")
-centered = false
-
-[node name="house" type="StaticBody2D" parent="World/NavigationRegion2d/Ground"]
-position = Vector2(140, 156)
-
-[node name="CollisionShape2d" type="CollisionShape2D" parent="World/NavigationRegion2d/Ground/house"]
-shape = SubResource("RectangleShape2D_ndssk")
-
-[node name="tree" type="StaticBody2D" parent="World/NavigationRegion2d/Ground"]
-position = Vector2(160, 244)
-
-[node name="CollisionShape2d" type="CollisionShape2D" parent="World/NavigationRegion2d/Ground/tree"]
-shape = SubResource("CircleShape2D_kpo6e")
-
-[node name="stone" type="StaticBody2D" parent="World/NavigationRegion2d/Ground"]
-position = Vector2(202, 289)
-
-[node name="CollisionShape2d" type="CollisionShape2D" parent="World/NavigationRegion2d/Ground/stone"]
-shape = SubResource("RectangleShape2D_aah4x")
-
-[node name="Npc" parent="World/NavigationRegion2d" instance=ExtResource("3_qpunm")]
-position = Vector2(-21, -11)
-
-[node name="Player" parent="World/NavigationRegion2d" instance=ExtResource("1_nds0b")]
-position = Vector2(6, 73)
-
-[node name="Camera2d" type="Camera2D" parent="World/NavigationRegion2d/Player"]
-current = true
+[node name="TestMap" parent="World" instance=ExtResource("2_eo8mr")]
 
 [node name="Hud" type="CanvasLayer" parent="."]
 script = ExtResource("4_0hsi7")

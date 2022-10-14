@@ -1,0 +1,67 @@
+[gd_scene load_steps=14 format=3 uid="uid://bnoej6qxytdx"]
+
+[ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://ass/ground1.png" id="1_8q8s3"]
+[ext_resource type="Script" path="res://src/test_map.gd" id="1_yj7ra"]
+[ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://ass/ground2.png" id="2_t7f11"]
+[ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://ass/objects1.png" id="3_6dvnm"]
+[ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://ass/objects2.png" id="4_vpsec"]
+[ext_resource type="PackedScene" uid="uid://cfyi60se7jt3d" path="res://scn/npc.tscn" id="6_7n42m"]
+[ext_resource type="Shader" path="res://shd/test_map.gdshader" id="6_8q05f"]
+[ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://ass/is_top1.png" id="7_7ubgj"]
+[ext_resource type="PackedScene" uid="uid://di0pb23hwj7qv" path="res://scn/player.tscn" id="7_o1uyt"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_exdxa"]
+vertices = PackedVector2Array(314, 142, 317, 246, 225, 285, 181, 284, 174, 253, 173, 240, 173, 164, 300, 70, 298, 374, 220, 298, 318, 444, 357, 509, 1, 510, 148, 238, 106, 161, 177, 300, 284, 3, 136, 130, 3, 3, 66, 127, 145, 251)
+polygons = [PackedInt32Array(0, 1, 2, 3, 4, 5, 6, 7), PackedInt32Array(2, 1, 8, 9), PackedInt32Array(10, 11, 12), PackedInt32Array(6, 5, 13, 14), PackedInt32Array(9, 8, 10, 12, 15), PackedInt32Array(16, 7, 6, 17, 18), PackedInt32Array(18, 17, 19), PackedInt32Array(12, 18, 19), PackedInt32Array(12, 19, 14, 13, 20), PackedInt32Array(3, 15, 12, 20, 4)]
+outlines = [PackedVector2Array(3, 3, 284, 3, 300, 70, 314, 142, 317, 246, 298, 374, 318, 444, 357, 509, 1, 510), PackedVector2Array(66, 127, 136, 130, 173, 164, 106, 161), PackedVector2Array(148, 238, 173, 240, 174, 253, 145, 251), PackedVector2Array(181, 284, 225, 285, 220, 298, 177, 300)]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4yye3"]
+animations = [{
+"frames": [ExtResource("1_8q8s3"), ExtResource("2_t7f11")],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oxjd1"]
+animations = [{
+"frames": [ExtResource("3_6dvnm"), ExtResource("4_vpsec")],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4twmn"]
+shader = ExtResource("6_8q05f")
+shader_parameter/alpha = 0.8
+shader_parameter/is_top = ExtResource("7_7ubgj")
+
+[node name="TestMap" type="NavigationRegion2D"]
+navpoly = SubResource("NavigationPolygon_exdxa")
+script = ExtResource("1_yj7ra")
+
+[node name="Ground" type="AnimatedSprite2D" parent="."]
+frames = SubResource("SpriteFrames_4yye3")
+playing = true
+centered = false
+
+[node name="Objects" type="AnimatedSprite2D" parent="."]
+frames = SubResource("SpriteFrames_oxjd1")
+playing = true
+centered = false
+
+[node name="Top" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_4twmn")
+z_index = 99
+frames = SubResource("SpriteFrames_oxjd1")
+frame = 1
+centered = false
+
+[node name="Npc" parent="." instance=ExtResource("6_7n42m")]
+position = Vector2(167, 79)
+
+[node name="Player" parent="." instance=ExtResource("7_o1uyt")]
+position = Vector2(145, 227)
+
+[node name="Camera2d" type="Camera2D" parent="Player"]
+current = true

@@ -3,7 +3,6 @@ extends CharacterBody2D
 
 const SPEED = 50.0
 @onready var nav_agent = $NavAgent as NavigationAgent2D
-@onready var timer = $Timer as Timer
 
 var player:Player
 
