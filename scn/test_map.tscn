@@ -1,13 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bnoej6qxytdx"]
+[gd_scene load_steps=13 format=3 uid="uid://bg26q8ha801kx"]
 
-[ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://ass/ground1.png" id="1_8q8s3"]
+[ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://ass/maps/test_map/ground1.png" id="1_8q8s3"]
 [ext_resource type="Script" path="res://src/test_map.gd" id="1_yj7ra"]
-[ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://ass/ground2.png" id="2_t7f11"]
-[ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://ass/objects1.png" id="3_6dvnm"]
-[ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://ass/objects2.png" id="4_vpsec"]
-[ext_resource type="PackedScene" uid="uid://b3noswe0aih0f" path="res://scn/npc.tscn" id="6_7n42m"]
+[ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://ass/maps/test_map/ground2.png" id="2_t7f11"]
+[ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://ass/maps/test_map/objects1.png" id="3_6dvnm"]
+[ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://ass/maps/test_map/objects2.png" id="4_vpsec"]
 [ext_resource type="Shader" path="res://shd/test_map.gdshader" id="6_8q05f"]
-[ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://ass/is_top1.png" id="7_7ubgj"]
+[ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://ass/maps/test_map/is_top1.png" id="7_7ubgj"]
 [ext_resource type="PackedScene" uid="uid://di0pb23hwj7qv" path="res://scn/player.tscn" id="7_o1uyt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_exdxa"]
@@ -54,7 +53,6 @@ centered = false
 material = SubResource("ShaderMaterial_4twmn")
 z_index = 99
 frames = SubResource("SpriteFrames_oxjd1")
-frame = 1
 centered = false
 
 [node name="is_top" type="Sprite2D" parent="."]
@@ -67,5 +65,19 @@ position = Vector2(60, 160)
 [node name="Camera2d" type="Camera2D" parent="Player"]
 current = true
 
-[node name="Npc" parent="." instance=ExtResource("6_7n42m")]
-position = Vector2(198, 112)
+[node name="house" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="house"]
+polygon = PackedVector2Array(167, 161, 138, 132, 74, 131, 111, 159)
+
+[node name="tree" type="StaticBody2D" parent="."]
+position = Vector2(40, 105)
+
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="tree"]
+polygon = PackedVector2Array(128, 145, 127, 135, 114, 135, 113, 144)
+
+[node name="stone" type="StaticBody2D" parent="."]
+position = Vector2(68, 154)
+
+[node name="CollisionPolygon2d" type="CollisionPolygon2D" parent="stone"]
+polygon = PackedVector2Array(153, 144, 154, 136, 114, 135, 113, 144)

@@ -10,11 +10,11 @@ func _ready():
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
 func _physics_process(delta):
-#	if nav_agent.is_target_reachable():
-	var next_location = nav_agent.get_next_location()
-	nav_agent.set_velocity(global_position.direction_to(next_location) * nav_agent.max_speed)
-#	else:
-#		nav_agent.set_velocity(Vector2.ZERO)
+	if nav_agent.is_target_reachable():
+		var next_location = nav_agent.get_next_location()
+		nav_agent.set_velocity(global_position.direction_to(next_location) * nav_agent.max_speed)
+	else:
+		nav_agent.set_velocity(Vector2.ZERO)
 
 
 func _on_velocity_computed(safe_velocity):

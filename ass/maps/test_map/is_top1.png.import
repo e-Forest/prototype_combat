@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bogskpv6jw5g3"
-path.s3tc="res://.godot/imported/is_top1.png-65f04c350d6ca7156ec17cc974424394.s3tc.ctex"
-path.etc2="res://.godot/imported/is_top1.png-65f04c350d6ca7156ec17cc974424394.etc2.ctex"
+path.s3tc="res://.godot/imported/is_top1.png-f324a78d2d8a8b4b92ed19424e78fba1.s3tc.ctex"
+path.etc2="res://.godot/imported/is_top1.png-f324a78d2d8a8b4b92ed19424e78fba1.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc", "etc2"],
 "vram_texture": true
@@ -12,8 +12,8 @@ metadata={
 
 [deps]
 
-source_file="res://ass/is_top1.png"
-dest_files=["res://.godot/imported/is_top1.png-65f04c350d6ca7156ec17cc974424394.s3tc.ctex", "res://.godot/imported/is_top1.png-65f04c350d6ca7156ec17cc974424394.etc2.ctex"]
+source_file="res://ass/maps/test_map/is_top1.png"
+dest_files=["res://.godot/imported/is_top1.png-f324a78d2d8a8b4b92ed19424e78fba1.s3tc.ctex", "res://.godot/imported/is_top1.png-f324a78d2d8a8b4b92ed19424e78fba1.etc2.ctex"]
 
 [params]
 
