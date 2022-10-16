@@ -10,8 +10,6 @@ var look_dir:Vector2
 var attack_start_pos:Vector2
 var attack_end_pos:Vector2
 var attack_range:float = 50.0
-#var attack_time:float
-#var attack_time_default:float=0.4
 
 var speed:float = 100.0
 

@@ -1,10 +1,10 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=20 format=3 uid="uid://crg0cr4a4h3in"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_wl4ff"]
-[ext_resource type="Texture2D" uid="uid://ddgb5cb4dhedu" path="res://assets/player/player.png" id="2_xbvgy"]
-[ext_resource type="Script" path="res://scripts/state_machine.gd" id="3_8tomb"]
-[ext_resource type="Script" path="res://scripts/hit_box.gd" id="4_raxma"]
-[ext_resource type="Script" path="res://scripts/pro_timer.gd" id="5_c7jkl"]
+[ext_resource type="Script" path="res://scripts/components/state_machine.gd" id="2_343o3"]
+[ext_resource type="Texture2D" path="res://assets/player/player.png" id="2_xbvgy"]
+[ext_resource type="Script" path="res://scripts/components/hit_box.gd" id="3_pjfac"]
+[ext_resource type="Script" path="res://scripts/components/pro_timer.gd" id="5_wfylf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdhh2"]
 radius = 2.0
@@ -103,7 +103,7 @@ width = 2.0
 default_color = Color(0.972549, 1, 0, 1)
 
 [node name="StateMachine" type="Node2D" parent="."]
-script = ExtResource("3_8tomb")
+script = ExtResource("2_343o3")
 
 [node name="AttackRay" type="RayCast2D" parent="."]
 
@@ -116,14 +116,14 @@ text = "<state>"
 
 [node name="HitBoxStroke" type="Area2D" parent="."]
 position = Vector2(0, -8)
-script = ExtResource("4_raxma")
+script = ExtResource("3_pjfac")
 
 [node name="shape" type="CollisionShape2D" parent="HitBoxStroke"]
 shape = SubResource("CircleShape2D_c21rk")
 
 [node name="HitBoxStitch" type="Area2D" parent="."]
 position = Vector2(0, -6)
-script = ExtResource("4_raxma")
+script = ExtResource("3_pjfac")
 
 [node name="shape" type="CollisionShape2D" parent="HitBoxStitch"]
 shape = SubResource("CircleShape2D_fvx33")
@@ -133,15 +133,15 @@ shape = SubResource("CircleShape2D_fvx33")
 [node name="anim_sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 frames = SubResource("SpriteFrames_lx2oy")
-animation = &"attack_stitch"
+animation = &"idle"
 playing = true
 
 [node name="StitchTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
-script = ExtResource("5_c7jkl")
+script = ExtResource("5_wfylf")
 
 [node name="StrokeTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
-script = ExtResource("5_c7jkl")
+script = ExtResource("5_wfylf")

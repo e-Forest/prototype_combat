@@ -12,7 +12,7 @@ _global_script_classes=[{
 "base": "Area2D",
 "class": &"HitBox",
 "language": &"GDScript",
-"path": "res://scripts/hit_box.gd"
+"path": "res://scripts/components/hit_box.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"Player",
@@ -22,12 +22,12 @@ _global_script_classes=[{
 "base": "Timer",
 "class": &"ProTimer",
 "language": &"GDScript",
-"path": "res://scripts/pro_timer.gd"
+"path": "res://scripts/components/pro_timer.gd"
 }, {
 "base": "Node2D",
 "class": &"StateMachine",
 "language": &"GDScript",
-"path": "res://scripts/state_machine.gd"
+"path": "res://scripts/components/state_machine.gd"
 }]
 _global_script_class_icons={
 "HitBox": "",
