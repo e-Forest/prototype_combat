@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bg26q8ha801kx"]
+[gd_scene load_steps=13 format=3]
 
-[ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://ass/maps/test_map/ground1.png" id="1_8q8s3"]
-[ext_resource type="Script" path="res://src/test_map.gd" id="1_yj7ra"]
-[ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://ass/maps/test_map/ground2.png" id="2_t7f11"]
-[ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://ass/maps/test_map/objects1.png" id="3_6dvnm"]
-[ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://ass/maps/test_map/objects2.png" id="4_vpsec"]
-[ext_resource type="Shader" path="res://shd/test_map.gdshader" id="6_8q05f"]
-[ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://ass/maps/test_map/is_top1.png" id="7_7ubgj"]
-[ext_resource type="PackedScene" uid="uid://du4eln10v2p0e" path="res://scn/player.tscn" id="7_o1uyt"]
+[ext_resource type="Texture2D" uid="uid://duhquuceg4qtv" path="res://assets/maps/test_map/ground1.png" id="1_8q8s3"]
+[ext_resource type="Script" path="res://scripts/test_map.gd" id="1_yj7ra"]
+[ext_resource type="Texture2D" uid="uid://cg20pg4lqc5jg" path="res://assets/maps/test_map/ground2.png" id="2_t7f11"]
+[ext_resource type="Texture2D" uid="uid://bmll6ikuewmfy" path="res://assets/maps/test_map/objects1.png" id="3_6dvnm"]
+[ext_resource type="Texture2D" uid="uid://c5kwg4lwrtfmc" path="res://assets/maps/test_map/objects2.png" id="4_vpsec"]
+[ext_resource type="Shader" path="res://shader/test_map.gdshader" id="6_8q05f"]
+[ext_resource type="Texture2D" uid="uid://bogskpv6jw5g3" path="res://assets/maps/test_map/is_top1.png" id="7_7ubgj"]
+[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="7_o1uyt"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_exdxa"]
 vertices = PackedVector2Array(317, 246, 298, 374, 224, 305, 224, 289, 314, 142, 179, 288, 177, 257, 177, 240, 187, 169, 300, 70, 318, 444, 357, 509, 1, 510, 104, 167, 146, 240, 178, 304, 144, 129, 284, 3, 145, 255, 3, 3, 60, 128)

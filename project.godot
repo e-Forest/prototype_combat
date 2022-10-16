@@ -12,22 +12,22 @@ _global_script_classes=[{
 "base": "Area2D",
 "class": &"HitBox",
 "language": &"GDScript",
-"path": "res://src/hit_box.gd"
+"path": "res://scripts/hit_box.gd"
 }, {
 "base": "CharacterBody2D",
 "class": &"Player",
 "language": &"GDScript",
-"path": "res://src/player.gd"
+"path": "res://scripts/player.gd"
 }, {
 "base": "Timer",
 "class": &"ProTimer",
 "language": &"GDScript",
-"path": "res://src/pro_timer.gd"
+"path": "res://scripts/pro_timer.gd"
 }, {
 "base": "Node2D",
 "class": &"StateMachine",
 "language": &"GDScript",
-"path": "res://src/state_machine.gd"
+"path": "res://scripts/state_machine.gd"
 }]
 _global_script_class_icons={
 "HitBox": "",
@@ -39,15 +39,15 @@ _global_script_class_icons={
 [application]
 
 config/name="PreCombat"
-run/main_scene="res://scn/game.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerInput="*res://src/autoload/player_input.gd"
-States="*res://src/autoload/states.gd"
-Helper="*res://src/autoload/helper.gd"
+PlayerInput="*res://scripts/autoload/player_input.gd"
+States="*res://scripts/autoload/states.gd"
+Helper="*res://scripts/autoload/helper.gd"
 
 [display]
 
