@@ -29,13 +29,17 @@ func _process(delta):
 func get_dif_start2hold()->Vector2:
 	var dif:Vector2 = aim_hold - aim_start
 	if dif.length() > TRASHOLD:
-		return (aim_hold - aim_start)
+		return (dif)
 	else:
 		return Vector2.ZERO
 
 
 func get_dif_start2end()->Vector2:
-	return(aim_end-aim_start)
+	var dif:Vector2 = aim_end - aim_start
+	if dif.length() > TRASHOLD:
+		return (dif)
+	else:
+		return Vector2.ZERO
 
 
 func get_move_vector()->Vector2:

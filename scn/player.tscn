@@ -1,91 +1,82 @@
-[gd_scene load_steps=13 format=3 uid="uid://di0pb23hwj7qv"]
+[gd_scene load_steps=20 format=3 uid="uid://du4eln10v2p0e"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_wl4ff"]
-[ext_resource type="Texture2D" uid="uid://ddgb5cb4dhedu" path="res://ass/player.png" id="2_feudt"]
+[ext_resource type="Texture2D" uid="uid://ddgb5cb4dhedu" path="res://ass/player/player.png" id="2_xbvgy"]
 [ext_resource type="Script" path="res://src/state_machine.gd" id="3_8tomb"]
 [ext_resource type="Script" path="res://src/hit_box.gd" id="4_raxma"]
+[ext_resource type="Script" path="res://src/pro_timer.gd" id="5_c7jkl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wdhh2"]
 radius = 2.0
-
-[sub_resource type="Animation" id="Animation_e64y2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_67dm1"]
-resource_name = "attack"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(-1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_t4jkw"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.1, 0.9)]
-}
-
-[sub_resource type="Animation" id="Animation_4vndj"]
-resource_name = "run"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.9, 1.1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kni6f"]
-_data = {
-"RESET": SubResource("Animation_e64y2"),
-"attack": SubResource("Animation_67dm1"),
-"idle": SubResource("Animation_t4jkw"),
-"run": SubResource("Animation_4vndj")
-}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c21rk"]
 radius = 20.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fvx33"]
 radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6vhdc"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6qfd6"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe47j"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1011m"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5quwi"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(96, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c8ob1"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(144, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdgop"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56ry2"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfcae"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rghuo"]
+atlas = ExtResource("2_xbvgy")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lx2oy"]
+animations = [{
+"frames": [SubResource("AtlasTexture_6vhdc"), SubResource("AtlasTexture_6qfd6")],
+"loop": true,
+"name": &"attack_stitch",
+"speed": 10.0
+}, {
+"frames": [SubResource("AtlasTexture_fe47j"), SubResource("AtlasTexture_1011m"), SubResource("AtlasTexture_5quwi"), SubResource("AtlasTexture_c8ob1")],
+"loop": true,
+"name": &"attack_stroke",
+"speed": 10.0
+}, {
+"frames": [SubResource("AtlasTexture_fdgop"), SubResource("AtlasTexture_56ry2")],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [SubResource("AtlasTexture_qfcae"), SubResource("AtlasTexture_rghuo")],
+"loop": true,
+"name": &"run",
+"speed": 4.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 0
@@ -95,10 +86,6 @@ script = ExtResource("1_wl4ff")
 [node name="shape" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_wdhh2")
-
-[node name="Skin" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
-texture = ExtResource("2_feudt")
 
 [node name="MoveDirPointer" type="Line2D" parent="."]
 points = PackedVector2Array(10, 0, 0, 0)
@@ -117,12 +104,6 @@ default_color = Color(0.972549, 1, 0, 1)
 
 [node name="StateMachine" type="Node2D" parent="."]
 script = ExtResource("3_8tomb")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Skin")
-libraries = {
-"": SubResource("AnimationLibrary_kni6f")
-}
 
 [node name="AttackRay" type="RayCast2D" parent="."]
 
@@ -148,3 +129,19 @@ script = ExtResource("4_raxma")
 shape = SubResource("CircleShape2D_fvx33")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
+
+[node name="anim_sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+frames = SubResource("SpriteFrames_lx2oy")
+animation = &"attack_stitch"
+playing = true
+
+[node name="StitchTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+script = ExtResource("5_c7jkl")
+
+[node name="StrokeTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+script = ExtResource("5_c7jkl")

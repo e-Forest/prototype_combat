@@ -10,9 +10,8 @@ var look_dir:Vector2
 var attack_start_pos:Vector2
 var attack_end_pos:Vector2
 var attack_range:float = 50.0
-#var attack_shorter_percent:float
-var attack_time:float
-var attack_time_default:float=0.4
+#var attack_time:float
+#var attack_time_default:float=0.4
 
 var speed:float = 100.0
 
@@ -21,20 +20,22 @@ var speed:float = 100.0
 @onready var look_dir_pointer = $LookDirPointer as Line2D
 @onready var aim_dir_pointer = $AimDirPointer as Line2D
 @onready var state_machine = $StateMachine as StateMachine
-@onready var animation_player = $AnimationPlayer as AnimationPlayer
+@onready var anim_sprite = $anim_sprite as AnimatedSprite2D
 @onready var debug_state = $DebugState as Label
 @onready var attack_ray = $AttackRay  as RayCast2D
 @onready var hit_box_stroke = $HitBoxStroke as HitBox
 @onready var hit_box_stitch = $HitBoxStitch as HitBox
 @onready var nav_agent = $NavAgent as NavigationAgent2D
-
+@onready var stitch_timer = $StitchTimer as ProTimer
+@onready var stroke_timer = $StrokeTimer as ProTimer
 
 
 func _ready():
 	PlayerInput.aim_ended.connect(self._on_aim_ended)
 	state_machine.state_entered.connect(self._on_state_entered)
 	state_machine.current_state = States.Player.idle
-	attack_ended.connect(func(): state_machine.current_state = States.Player.idle)
+	stitch_timer.timeout.connect(func(): state_machine.current_state = States.Player.idle)
+	stroke_timer.timeout.connect(func(): state_machine.current_state = States.Player.idle)
 
 
 func _process(delta):
@@ -50,24 +51,22 @@ func _process(delta):
 			update_lookpointer(PlayerInput.get_move_vector())
 			if PlayerInput.get_move_vector()==Vector2.ZERO:
 				state_machine.current_state = States.Player.idle
-		States.Player.attack:
+		States.Player.attack_stroke:
+			update_aimpointer()
+			update_lookpointer(get_attack_direction())
+		States.Player.attack_stitch:
 			update_attack_movement(delta)
 			update_aimpointer()
 			update_lookpointer(get_attack_direction())
-#			update_hitbox_stitch()
 			if (is_move_in_aim_direction()
-				and is_attack_halftime_reached()
+				and stitch_timer.get_percent()<0.5
 				and is_position_walkable(global_position)):
 				state_machine.current_state = States.Player.idle
 
 
 func update_attack_movement(delta:float):
-	attack_time-=delta
-	if attack_time < 0.0:
-		emit_signal("attack_ended")
-		return
-	var timer_percent = 1-attack_time/attack_time_default
-	if not is_attack_halftime_reached():
+	var timer_percent = stitch_timer.get_percent()
+	if timer_percent<0.5:
 		var progress = timer_percent * 2
 		global_position = attack_start_pos.lerp(attack_end_pos,progress)
 	else:
@@ -97,6 +96,7 @@ func update_lookpointer(local_pos:Vector2):
 	var dir = local_pos.normalized()
 	look_dir_pointer.set_point_position(0,Vector2.ZERO)
 	look_dir_pointer.set_point_position(1,dir*10)
+	anim_sprite.flip_h=abs(local_pos.angle())>PI/2
 
 
 func update_aimpointer():
@@ -130,23 +130,25 @@ func is_position_walkable(pos:Vector2)->bool:
 	return ret
 
 
-func is_attack_halftime_reached()->bool:
-	return(attack_time < attack_time_default/2)
-
-
 func _on_state_entered(state):
 	debug_state.text = States.Player.keys()[state]
 	match state:
 		States.Player.idle:
-			animation_player.play("idle")
+			anim_sprite.play("idle")
 		States.Player.run:
-			animation_player.play("run")
-		States.Player.attack:
-			animation_player.play("attack")
+			anim_sprite.play("run")
+		States.Player.attack_stroke:
+			anim_sprite.play("attack_stroke")
+		States.Player.attack_stitch:
+			anim_sprite.play("attack_stitch")
 
 
 func _on_aim_ended(start_pos:Vector2,end_pos:Vector2):
 	attack_start_pos = position
 	attack_end_pos = position + aim_dir_pointer.get_point_position(1)
-	attack_time = attack_time_default
-	state_machine.current_state = States.Player.attack
+	if PlayerInput.get_dif_start2end()==Vector2.ZERO:
+		stroke_timer.start()
+		state_machine.current_state = States.Player.attack_stroke
+	else:
+		stitch_timer.start()
+		state_machine.current_state = States.Player.attack_stitch
