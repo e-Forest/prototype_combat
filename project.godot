@@ -9,6 +9,11 @@
 config_version=5
 
 _global_script_classes=[{
+"base": "Line2D",
+"class": &"AimCom",
+"language": &"GDScript",
+"path": "res://scripts/components/aim_com.gd"
+}, {
 "base": "Area2D",
 "class": &"HitBox",
 "language": &"GDScript",
@@ -30,6 +35,7 @@ _global_script_classes=[{
 "path": "res://scripts/components/state_machine.gd"
 }]
 _global_script_class_icons={
+"AimCom": "",
 "HitBox": "",
 "Player": "",
 "ProTimer": "",

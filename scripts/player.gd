@@ -16,7 +16,7 @@ var speed:float = 100.0
 
 @onready var move_dir_pointer = $MoveDirPointer as Line2D
 @onready var look_dir_pointer = $LookDirPointer as Line2D
-@onready var aim_dir_pointer = $AimDirPointer as Line2D
+@onready var aim_dir_pointer = $AimDirPointer as AimCom
 @onready var state_machine = $StateMachine as StateMachine
 @onready var anim_sprite = $anim_sprite as AnimatedSprite2D
 @onready var debug_state = $DebugState as Label
@@ -29,7 +29,7 @@ var speed:float = 100.0
 
 
 func _ready():
-	PlayerInput.aim_ended.connect(self._on_aim_ended)
+	PlayerInput.click_ended.connect(self._on_aim_ended)
 	state_machine.state_entered.connect(self._on_state_entered)
 	state_machine.current_state = States.Player.idle
 	stitch_timer.timeout.connect(func(): state_machine.current_state = States.Player.idle)
